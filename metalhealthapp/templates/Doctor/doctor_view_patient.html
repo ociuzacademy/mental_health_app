@@ -1,0 +1,66 @@
+{% extends 'Doctor/doctor_home.html' %}
+{% block content %}
+
+
+<div class="w3ls-banner">
+	<div class="heading">
+		<h1>View Patients</h1>
+	</div>
+		<div class="container_1">
+			<div class="heading">
+				<!-- <h2>Please Enter Details</h2> -->
+				<!-- <p>Fill tde form below and submit your query we will contact you as soon as possible.</p> -->
+			</div>
+			<div class="agile-form">
+				<table id="example2" class="table table-bordered table-hover">
+                
+                <thead>
+                <tr>
+                  <th>name</th>
+                  <th>result</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in var  %}
+                <tr>
+                  <td>{{x.user_ID.name}}</td>
+                  <td><a href="/resultpdf/?id={{x.id}}">result link</a></td>
+                  <td>{{x.report_status}}</td>
+                  <td><a href="/doctor_add_report/?id={{x.id}}"><button>Report</button></a>
+                    <a href="/doctor_mail/?id={{x.id}}"><button>Send mail</button></a></td>
+          
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                
+                <thead>
+                <tr>
+                  <th>name</th>
+                  <th>result</th>
+                  <th>Status</th>
+                  <!-- <th></th> -->
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in st  %}
+                <tr>
+                  <td>{{x.user_ID.name}}</td>
+                  <td><a href="/resultpdf/?id={{x.id}}">result link</a></td>
+                  <td>{{x.report_status}}</td>
+                 <!--  <td><a href="/add_report/?id={{x.id}}"><button>Report</button></a></td> -->
+          
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+			</div>
+		</div>
+</div>
+
+{% endblock %}

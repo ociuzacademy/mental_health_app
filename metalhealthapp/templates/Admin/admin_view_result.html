@@ -1,0 +1,435 @@
+{% extends 'Admin/admin_home.html' %}
+{% block content %}
+
+<style>
+
+    .result-section{
+        padding:40px 0;
+    }
+
+    .result-card{
+        background:#fff;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        margin-bottom:40px;
+    }
+
+    .main-title{
+        text-align:center;
+        font-weight:bold;
+        color:#2c3e50;
+        margin-bottom:30px;
+    }
+
+    .section-title{
+        font-size:24px;
+        font-weight:600;
+        color:#0d6efd;
+        margin-bottom:20px;
+    }
+
+    .table thead{
+        background:#0d6efd;
+        color:white;
+    }
+
+    .table th,
+    .table td{
+        vertical-align:middle;
+        text-align:center;
+        padding:15px;
+    }
+
+    .btn-view{
+        background:#198754;
+        color:white;
+        border:none;
+        padding:8px 18px;
+        border-radius:6px;
+        font-weight:500;
+    }
+
+    .btn-forward{
+        background:#0d6efd;
+        color:white;
+        border:none;
+        padding:8px 18px;
+        border-radius:6px;
+        font-weight:500;
+    }
+
+    .btn-remove{
+        background:#dc3545;
+        color:white;
+        border:none;
+        padding:8px 18px;
+        border-radius:6px;
+        font-weight:500;
+    }
+
+    .status-normal{
+        color:green;
+        font-weight:bold;
+    }
+
+    .status-moderate{
+        color:orange;
+        font-weight:bold;
+    }
+
+    .status-strong{
+        color:red;
+        font-weight:bold;
+    }
+
+</style>
+
+<section class="result-section">
+
+    <div class="container">
+
+        <h2 class="main-title">
+            Mental Health Test Results
+        </h2>
+
+        <!-- PENDING CASES -->
+
+        <div class="result-card">
+
+            <h3 class="section-title">
+                Moderate & Strong Cases
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>User Name</th>
+                            <th>Status</th>
+                            <th>View Report</th>
+                            <th>Forward To Doctor</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for x in var %}
+
+                        <tr>
+
+                            <td>
+                                {{x.user_ID.name}}
+                            </td>
+
+                            <td>
+
+                                {% if x.status == 'Moderate' %}
+
+                                    <span class="status-moderate">
+                                        {{x.status}}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-strong">
+                                        {{x.status}}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <a href="/resultpdf/?id={{x.id}}">
+
+                                    <button class="btn-view">
+
+                                        View Result
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                            <td>
+
+                                <form action="/forward/" method="POST">
+
+                                    {% csrf_token %}
+
+                                    <input type="hidden"
+                                           name="idd"
+                                           value="{{x.id}}">
+
+                                    <div class="row">
+
+                                        <div class="col-md-8">
+
+                                            <select name="ans"
+                                                    class="form-control"
+                                                    required>
+
+                                                <option value="">
+                                                    Select Doctor
+                                                </option>
+
+                                                {% for d in doc %}
+
+                                                <option value="{{d.name}}">
+
+                                                    {{d.name}}
+
+                                                </option>
+
+                                                {% endfor %}
+
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <input type="submit"
+                                                   value="Forward"
+                                                   class="btn-forward">
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                No severe cases found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- FORWARDED CASES -->
+
+        <div class="result-card">
+
+            <h3 class="section-title">
+                Forwarded Cases
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>User Name</th>
+                            <th>Status</th>
+                            <th>Doctor</th>
+                            <th>View Report</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for x in fw %}
+
+                        <tr>
+
+                            <td>
+                                {{x.user_ID.name}}
+                            </td>
+
+                            <td>
+
+                                {% if x.status == 'Moderate' %}
+
+                                    <span class="status-moderate">
+                                        {{x.status}}
+                                    </span>
+
+                                {% elif x.status == 'Strong' %}
+
+                                    <span class="status-strong">
+                                        {{x.status}}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-normal">
+                                        {{x.status}}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {{x.doctor}}
+
+                            </td>
+
+                            <td>
+
+                                <a href="/resultpdf/?id={{x.id}}">
+
+                                    <button class="btn-view">
+
+                                        View Result
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                No forwarded cases available.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- NORMAL USERS -->
+
+        <div class="result-card">
+
+            <h3 class="section-title">
+                Normal Users
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>User Name</th>
+                            <th>Status</th>
+                            <th>View Result</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for x in nl %}
+
+                        <tr>
+
+                            <td>
+                                {{x.user_ID.name}}
+                            </td>
+
+                            <td>
+
+                                <span class="status-normal">
+
+                                    {{x.status}}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a href="/resultpdf/?id={{x.id}}">
+
+                                    <button class="btn-view">
+
+                                        View Result
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                            <td>
+
+                                <a href="/remove_normal_user/?id={{x.id}}">
+
+                                    <button class="btn-remove">
+
+                                        Remove
+
+                                    </button>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                No normal users available.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

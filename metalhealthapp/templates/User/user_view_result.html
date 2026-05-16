@@ -1,0 +1,207 @@
+{% extends 'User/user_home.html' %}
+{% block content %}
+
+<style>
+
+    .result-section{
+        padding:60px 0;
+        background:#f4f7fb;
+        min-height:100vh;
+    }
+
+    .result-card{
+        background:#fff;
+        padding:40px;
+        border-radius:15px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .main-title{
+        text-align:center;
+        font-weight:bold;
+        color:#2c3e50;
+        margin-bottom:10px;
+    }
+
+    .sub-title{
+        text-align:center;
+        color:#7f8c8d;
+        margin-bottom:35px;
+    }
+
+    .table thead{
+        background:#0d6efd;
+        color:white;
+    }
+
+    .table th,
+    .table td{
+        text-align:center;
+        vertical-align:middle;
+        padding:15px;
+    }
+
+    .status-normal{
+        color:green;
+        font-weight:bold;
+    }
+
+    .status-moderate{
+        color:orange;
+        font-weight:bold;
+    }
+
+    .status-strong{
+        color:red;
+        font-weight:bold;
+    }
+
+    .suggestion-box{
+        background:#eef5ff;
+        border-left:5px solid #0d6efd;
+        padding:15px;
+        border-radius:10px;
+        margin-top:10px;
+        font-size:15px;
+        color:#555;
+    }
+
+</style>
+
+<section class="result-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-11">
+
+                <div class="result-card">
+
+                    <h1 class="main-title">
+                        My Mental Health Results
+                    </h1>
+
+                    <p class="sub-title">
+                        View your assessment history and mental wellness status.
+                    </p>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-hover">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Total Score</th>
+                                    <th>Status</th>
+                                    <th>Suggestion</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for x in var %}
+
+                                <tr>
+
+                                    <td>
+                                        {{forloop.counter}}
+                                    </td>
+
+                                    <td>
+                                        <b>{{x.total}}</b>
+                                    </td>
+
+                                    <td>
+
+                                        {% if x.status == 'Normal' %}
+
+                                            <span class="status-normal">
+                                                {{x.status}}
+                                            </span>
+
+                                        {% elif x.status == 'Modrate' %}
+
+                                            <span class="status-moderate">
+                                                {{x.status}}
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status-strong">
+                                                {{x.status}}
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+
+                                        {% if x.status == 'Normal' %}
+
+                                            <div class="suggestion-box">
+
+                                                Maintain a healthy lifestyle,
+                                                regular exercise, and positive mindset.
+
+                                            </div>
+
+                                        {% elif x.status == 'Modrate' %}
+
+                                            <div class="suggestion-box">
+
+                                                Try stress management activities,
+                                                meditation, and proper rest.
+
+                                            </div>
+
+                                        {% else %}
+
+                                            <div class="suggestion-box">
+
+                                                Professional mental health consultation
+                                                is highly recommended.
+
+                                            </div>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                                {% empty %}
+
+                                <tr>
+
+                                    <td colspan="4">
+
+                                        No assessment results available.
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

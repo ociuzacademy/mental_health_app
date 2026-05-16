@@ -1,0 +1,53 @@
+{% extends 'User/user_home.html' %}
+{% block content %}
+
+
+<div class="w3ls-banner">
+	<div class="heading">
+		<h1>Self Corner</h1>
+	</div>
+		<div class="container_1">
+			<div class="heading">
+				<h2>Please Enter Details</h2>
+				<!-- <p>Fill the form below and submit your query we will contact you as soon as possible.</p> -->
+			</div>
+			<div class="agile-form">
+				<form action="/user_selfcorner/" method="post">
+					{% csrf_token %}
+					<ul class="field-list">
+						
+						<li>
+							<label class="form-label"> 
+								Subject 
+								<span class="form-required"> * </span>
+							</label>
+							<div class="form-input">
+								<input type="text" name="sub" placeholder=" Subject" required >
+							</div>
+						</li>
+						
+						
+						<li> 
+							<label class="form-label">
+							   Your Experience
+							   <span class="form-required"> * </span>
+							</label>
+							<div class="form-input add">
+								<span class="form-sub-label">
+									<textarea name="journal" placeholder="Type Comments" required="" rows="6"></textarea>
+									
+								</span>
+								
+							</div>
+						</li>
+						
+						
+						
+					</ul>
+					<input type="submit" value="Add Now">
+				</form>	
+			</div>
+		</div>
+</div>
+
+{% endblock %}

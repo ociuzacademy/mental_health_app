@@ -1,0 +1,211 @@
+{% extends 'Doctor/doctor_home.html' %}
+{% block content %}
+
+<style>
+
+    body{
+        background: #f4f7fb;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .result-section{
+        padding: 50px 0;
+    }
+
+    .result-card{
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .main-title{
+        text-align: center;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .sub-title{
+        text-align: center;
+        color: #7f8c8d;
+        margin-bottom: 40px;
+    }
+
+    .instruction-box{
+        background: #eef5ff;
+        border-left: 5px solid #0d6efd;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+    }
+
+    .instruction-box h4{
+        color: #0d6efd;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .instruction-box p{
+        margin: 0;
+        line-height: 30px;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .table thead{
+        background: #0d6efd;
+        color: white;
+    }
+
+    .table th,
+    .table td{
+        vertical-align: middle;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .status-normal{
+        color: green;
+        font-weight: bold;
+    }
+
+    .status-moderate{
+        color: orange;
+        font-weight: bold;
+    }
+
+    .status-strong{
+        color: red;
+        font-weight: bold;
+    }
+
+    .result-footer{
+        text-align: center;
+        margin-top: 30px;
+        color: #888;
+        font-size: 15px;
+    }
+
+</style>
+
+<section class="result-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-11">
+
+                <div class="result-card">
+
+                    <h1 class="main-title">
+                        Mental Health Assessment Result
+                    </h1>
+
+                    <p class="sub-title">
+                        Detailed analysis of patient mental wellness assessment.
+                    </p>
+
+                    <!-- INSTRUCTIONS -->
+
+                    <div class="instruction-box">
+
+                        <h4>Assessment Instructions</h4>
+
+                        <p>
+                            • If the patient's score is less than or equal to 80, the patient is considered <b>Normal</b>.<br>
+
+                            • If the score is above 80 and less than or equal to 120, the patient is in a <b>Moderate Stage</b>.<br>
+
+                            • If the score is above 120, the patient has <b>Strong OCD Symptoms</b>.
+                        </p>
+
+                    </div>
+
+                    <!-- RESULT TABLE -->
+
+                    {% for x in var %}
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th>Answer Options</th>
+                                    <th>Total Score</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>{{x.answer}}</td>
+
+                                    <td>
+                                        <b>{{x.total}}</b>
+                                    </td>
+
+                                    <td>{{x.user_ID.name}}</td>
+
+                                    <td>{{x.user_ID.email}}</td>
+
+                                    <td>{{x.user_ID.phone}}</td>
+
+                                    <td>
+
+                                        {% if x.status == 'Normal' %}
+
+                                            <span class="status-normal">
+                                                {{x.status}}
+                                            </span>
+
+                                        {% elif x.status == 'Moderate' %}
+
+                                            <span class="status-moderate">
+                                                {{x.status}}
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status-strong">
+                                                {{x.status}}
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% endfor %}
+
+                    <div class="result-footer">
+
+                        Mental Healthcare System | Patient Assessment Report
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

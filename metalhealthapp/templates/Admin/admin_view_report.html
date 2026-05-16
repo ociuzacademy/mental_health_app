@@ -1,0 +1,49 @@
+{% extends 'Admin/admin_home.html' %}
+{% block content %}
+<div class="container">
+	<h3 class="heading-agileinfo"> Test Result Report</h3>
+	<div class="col-md-12 about-w3right">
+
+
+
+		<div class="card-body">
+
+       <table id="example2" class="table table-bordered table-hover">
+                <thead>
+               <tr>
+                
+                  <th colspan="2">Reports</th>
+                  <th> Patient Name</th>
+                  <th>Patient Email</th>
+                  <th>Patient Phone</th>
+                  <th>Counsellor</th>
+                  <th>Report Status</th>
+                  <!-- <th colspan="2">Status</th> -->
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in var  %}
+
+                <tr>
+                  <td colspan="2">{{x.description}}</td>
+                   <td>{{x.user_ID.name}}</td>
+                  <td>{{x.user_ID.email}}</td>
+                  <td>{{x.user_ID.phone}}</td>
+                  <td>{{x.doctor}}</td>
+                  <td>{{x.report_status}}</td>
+                  <!-- <td><a href="/remove_question/?id={{x.id}}"><button>remove</button></a></td> -->
+                </tr>
+                {% endfor %}
+               
+                </tbody>
+                
+              </table>
+           
+            </div>  
+		
+
+
+
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'User/user_home.html' %}
+{% block content %}
+
+
+<div class="w3ls-banner">
+	<div class="heading">
+		<h1>My Profile</h1>
+	</div>
+		<div class="container_1">
+			<div class="heading">
+				<!-- <h2>Please Enter Details</h2> -->
+				<!-- <p>Fill tde form below and submit your query we will contact you as soon as possible.</p> -->
+			</div>
+			<div class="agile-form">
+				<table class="table">
+					{% for x in var %}
+					<tr>
+						<td>Name</td><td>{{x.name}}</td>
+					</tr>
+					<tr>
+						<td>Gender</td><td>{{x.gender}}</td>
+					</tr>
+					<tr>
+						<td>Phone</td><td>{{x.phone}}</td>
+					</tr>
+					<tr>
+						<td>DOB</td><td>{{x.dob}}</td>
+					</tr>
+					<tr>
+						<td>Address</td><td>{{x.address}}</td>
+					</tr>
+					<tr>
+						<td>Email</td><td>{{x.email}}</td>
+					</tr>
+					<tr>
+						<td>Password</td><td>{{x.pswd}}</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="/user_editprofile/" class="btn btn-primary">EDIT</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+</div>
+
+{% endblock %}

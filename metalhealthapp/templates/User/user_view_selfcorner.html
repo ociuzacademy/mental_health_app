@@ -1,0 +1,30 @@
+{% extends 'User/user_home.html' %}
+{% block content %}
+<div class="container">
+	<h3 class="heading-agileinfo">Self Corner</h3>
+	<div class="col-md-12 about-w3right">
+		<table border="1" class="table">
+			<tr>
+				<th>Sl.No.</th>
+				<th>Subject</th>
+				<th>Experiences</th>
+				<th>Date</th>
+				
+				<th></th>
+			</tr>
+			{% for x in var %}
+			<tr>
+				<td>{{forloop.counter}}</td>
+				<td>{{x.sub}}</td>
+				<td>{{x.journal}}</td>
+				<td>{{x.date}}</td>
+				
+				
+				<td colspan="2"><a href="/user_remove_self/?id={{x.id}}" class="btn btn-primary">Remove</a></td>
+
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+{% endblock %}

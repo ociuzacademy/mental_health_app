@@ -1,0 +1,33 @@
+{% extends 'Admin/admin_home.html' %}
+{% block content %}
+<div class="container">
+	<h3 class="heading-agileinfo">User List</h3>
+	<div class="col-md-12 about-w3right">
+		<table border="1" class="table">
+			<tr>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Phone</th>
+				<th>DOB</th>
+				<th>Address</th>
+				<th>Email</th>
+				<th>Password</th>
+				<th></th>
+			</tr>
+			{% for x in var %}
+			<tr>
+				<td>{{x.name}}</td>
+				<td>{{x.gender}}</td>
+				<td>{{x.phone}}</td>
+				<td>{{x.dob}}</td>
+				<td>{{x.address}}</td>
+				<td>{{x.email}}</td>
+				<td>{{x.pswd}}</td>
+				<td colspan="2"><a href="/admin_user_approve/?id={{x.id}}" class="btn btn-primary">Approve</a> <a href="/admin_user_reject/?id={{x.id}}" class="btn btn-primary">Reject</a></td>
+
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'Doctor/doctor_home.html' %}
+{% block content %}
+<div class="container">
+	<h3 class="heading-agileinfo">Feedback</h3>
+	<div class="col-md-12 about-w3right">
+		<table border="1" class="table">
+			<tr>
+				<th>User Name</th>
+				<th>Email</th>
+				<th>Feedback</th>
+				<th>Date</th>
+				
+			</tr>
+			{% for x in var %}
+			<tr>
+				<td>{{x.user_id.name}}</td>
+				<td>{{x.user_id.email}}</td>
+				<td>{{x.feedback}}</td>
+				<td>{{x.date}}</td>
+				
+
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+{% endblock %}

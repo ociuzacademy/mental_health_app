@@ -1,0 +1,56 @@
+{% extends 'about.html' %}
+{% block content %}
+
+
+<div class="w3ls-banner">
+	<div class="heading">
+		<h1>Login</h1>
+	</div>
+		<div class="container_1">
+			<!-- <div class="heading">
+				<h2>Please Enter Patients Details</h2>
+				<p>Fill the form below and submit your query we will contact you as soon as possible.</p>
+			</div> -->
+			<div class="agile-form">
+				<form action="/login/" method="post">
+					{% csrf_token %}
+					<ul class="field-list">
+						<!-- <li>
+							<label class="form-label"> 
+								Full Name 
+								<span class="form-required"> * </span>
+							</label>
+							<div class="form-input">
+								<input type="text" name="patient_name" placeholder="Enter Patients Name" required >
+							</div>
+						</li> -->
+						
+						
+						
+						<li> 
+							<label class="form-label">
+							   E-Mail Address
+							   <span class="form-required"> * </span>
+							</label>
+							<div class="form-input">
+								<input type="email" name="email" placeholder="myname@example.com" required>
+							</div>
+						</li>
+						<li> 
+							<label class="form-label">
+							  Password
+							   <span class="form-required"> * </span>
+							</label>
+							<div class="form-input">
+								<input type="password" name="pswd" placeholder="Enter Password" required >
+							</div>
+						</li>
+						
+					</ul>
+					<input type="submit" value="Login Now">
+				</form>	
+			</div>
+		</div>
+</div>
+
+{% endblock %}

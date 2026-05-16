@@ -1,0 +1,63 @@
+{% extends 'User/user_home.html' %}
+{% block content %}
+
+
+<div class="w3ls-banner">
+	<div class="heading">
+		<h1>Send Feedback</h1>
+	</div>
+		<div class="container_1">
+			<div class="heading">
+				<h2>Please Enter Details</h2>
+				<!-- <p>Fill the form below and submit your query we will contact you as soon as possible.</p> -->
+			</div>
+			<div class="agile-form">
+				<form action="/user_feedback/" method="post">
+					{% csrf_token %}
+					<ul class="field-list">
+						{% for x in var %}
+						<li>
+							<label class="form-label"> 
+								Full Name 
+								<span class="form-required"> * </span>
+							</label>
+							<div class="form-input">
+								<input type="text" name="name" value="{{x.name}}" required >
+							</div>
+						</li>
+						
+						<li> 
+							<label class="form-label">
+							   Email Address
+							   <span class="form-required"> * </span>
+							</label>
+							<div class="form-input">
+								<input type="text" name="email" value="{{x.email}}" required >
+							</div>
+						</li>
+						{% endfor %}
+						
+						<li> 
+							<label class="form-label">
+							   Feedback
+							   <span class="form-required"> * </span>
+							</label>
+							<div class="form-input add">
+								<span class="form-sub-label">
+									<textarea name="feedback" placeholder="Type Comments" required="" rows="6"></textarea>
+									
+								</span>
+								
+							</div>
+						</li>
+						
+						
+						
+					</ul>
+					<input type="submit" value="Send Now">
+				</form>	
+			</div>
+		</div>
+</div>
+
+{% endblock %}
